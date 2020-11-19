@@ -423,6 +423,7 @@ $field-w: 250px;
   height: 80px;
   textarea {
     width: $field-w;
+    max-height: 80px;
     resize: none;
     outline: none;
     font-family: $robo;
@@ -496,7 +497,7 @@ animation: show 3s 1;
     }
   }
   .msg {
-     top: -500px; 
+     top: -450px; 
   }
 }
 </style>
