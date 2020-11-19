@@ -1,142 +1,227 @@
 <template>
-  <form class="new-client-form" @submit.prevent="onSubmit">
-    <div class="input-field">
-      <label for="surname">Фамилия</label>
-      <input
-        id="surname"
-        type="text"
-        v-model.trim="surname"
-        :class="{ invalid: $v.surname.$dirty && !$v.surname.required }"
-      />
-      <small v-if="$v.surname.$dirty && !$v.surname.required"
-        >Поле не должно быть пустым</small
-      >
-    </div>
-    <div class="input-field">
-      <label for="name">Имя</label>
-      <input
-        id="name"
-        type="text"
-        v-model.trim="name"
-        :class="{ invalid: $v.name.$dirty && !$v.name.required }"
-      />
-      <small v-if="$v.name.$dirty && !$v.name.required"
-        >Поле не должно быть пустым</small
-      >
-    </div>
-    <div class="input-field">
-      <label for="patronymic">Отчество</label>
-      <input id="patronymic" type="text" v-model="patronymic" />
-    </div>
-    <div class="input-field">
-      <label for="birth">Дата рождения</label>
-      <input
-        id="birth"
-        type="text"
-        v-model.trim="birth"
-        :class="{
-          invalid:
-            ($v.birth.$dirty && !$v.birth.required) || !$v.birth.validateDate,
-        }"
-      />
-      <small v-if="$v.birth.$dirty && !$v.birth.required"
-        >Поле не должно быть пустым</small
-      >
-      <small v-if="!$v.birth.validateDate"
-        >Введите в формате
-        {{
-          `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`
-        }}</small
-      >
-    </div>
-    <div class="input-field">
-      <label for="phone">Телефон</label>
-      <div class="phone-container">
-        <input
-          id="phone"
-          type="text"
-          v-model.trim="phone"
-          :class="{
-            invalid:
-              ($v.phone.$dirty && !$v.phone.required) ||
-              ($v.phone.$dirty && !$v.phone.validatePhone),
-          }"
-        />
+  <div class="box">
+    <div class="form-wrapper">
+      <div class="form-tab"></div>
+      <div class="form-logo">
+        <img src="@/assets/medods-logo.png" alt="logo" />
+        <span>Регистрация</span>
       </div>
-      <small v-if="$v.phone.$dirty && !$v.phone.required"
-        >Поле не должно быть пустым</small
-      >
-      <small v-else-if="$v.phone.$dirty && !$v.phone.validatePhone"
-        >Неверный формат</small
-      >
+      <form class="new-client-form" @submit.prevent="onSubmit">
+        <div class="new-client-form__container">
+          <div class="info-container">
+            <div class="field">
+              <label for="surname">Фамилия</label>
+              <input
+                id="surname"
+                type="text"
+                v-model.trim="surname"
+                :class="{ invalid: $v.surname.$dirty && !$v.surname.required }"
+              />
+              <small v-if="$v.surname.$dirty && !$v.surname.required"
+                >Поле не должно быть пустым</small
+              >
+            </div>
+            <div class="field">
+              <label for="name">Имя</label>
+              <input
+                id="name"
+                type="text"
+                v-model.trim="name"
+                :class="{ invalid: $v.name.$dirty && !$v.name.required }"
+              />
+              <small v-if="$v.name.$dirty && !$v.name.required"
+                >Поле не должно быть пустым</small
+              >
+            </div>
+            <div class="field">
+              <label for="patronymic">Отчество</label>
+              <input id="patronymic" type="text" v-model="patronymic" />
+            </div>
+            <div class="field">
+              <label for="birth">Дата рождения</label>
+              <input
+                id="birth"
+                type="text"
+                v-model.trim="birth"
+                :class="{
+                  invalid:
+                    ($v.birth.$dirty && !$v.birth.required) ||
+                    !$v.birth.validateDate,
+                }"
+              />
+              <small v-if="$v.birth.$dirty && !$v.birth.required"
+                >Поле не должно быть пустым</small
+              >
+              <small v-if="!$v.birth.validateDate"
+                >Введите в формате
+                {{
+                  `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`
+                }}</small
+              >
+            </div>
+            <div class="field">
+              <label for="phone">Телефон</label>
+              <div
+                class="phone-container"
+                :class="{
+                  invalid:
+                    ($v.phone.$dirty && !$v.phone.required) ||
+                    ($v.phone.$dirty && !$v.phone.validatePhone),
+                }"
+              >
+                <input
+                  id="phone"
+                  type="text"
+                  v-model.trim="phone"
+                  :class="{
+                    invalid:
+                      ($v.phone.$dirty && !$v.phone.required) ||
+                      ($v.phone.$dirty && !$v.phone.validatePhone),
+                  }"
+                />
+              </div>
+              <small v-if="$v.phone.$dirty && !$v.phone.required"
+                >Поле не должно быть пустым</small
+              >
+              <small v-else-if="$v.phone.$dirty && !$v.phone.validatePhone"
+                >Неверный формат</small
+              >
+            </div>
+            <div class="field">
+              <label for="gender">Пол</label>
+              <input id="gender" type="text" v-model="gender" />
+            </div>
+            <div class="field">
+              <label for="male">Группа</label>
+              <select
+                name="group"
+                id="group"
+                v-model.trim="group"
+                :class="{ invalid: $v.group.$dirty && !$v.group.required }"
+              >
+                <option value="vip">VIP</option>
+                <option value="trouble">Проблемные</option>
+                <option value="oms">ОМС</option>
+              </select>
+              <small v-if="$v.group.$dirty && !$v.group.required"
+                >Поле не должно быть пустым</small
+              >
+            </div>
+            <div class="field">
+              <label for="doctor">Врач</label>
+              <select name="doctor" id="doctor" v-model.trim="doctor">
+                <option value="ivanov">Иванов</option>
+                <option value="zaharov">Захаров</option>
+                <option value="chernysheva">Чернышева</option>
+              </select>
+            </div>
+            <div class="field-checkbox">
+              <input v-model="sms" type="checkbox" id="sms" />
+              <label for="sms">Не отправлять СМС</label>
+            </div>
+          </div>
+          <div class="document-container">
+            <div class="field">
+              <label for="zip">Индекс</label>
+              <input id="zip" type="text" v-model="zip" />
+            </div>
+            <div class="field">
+              <label for="country">Страна</label>
+              <input id="country" type="text" v-model="country" />
+            </div>
+            <div class="field">
+              <label for="area">Область</label>
+              <input id="area" type="text" v-model="area" />
+            </div>
+            <div class="field">
+              <label for="city">Город</label>
+              <input
+                id="city"
+                type="text"
+                v-model.trim="city"
+                :class="{ invalid: $v.city.$dirty && !$v.city.required }"
+              />
+              <small v-if="$v.city.$dirty && !$v.city.required"
+                >Поле не должно быть пустым</small
+              >
+            </div>
+            <div class="field">
+              <label for="street">Улица</label>
+              <input id="street" type="text" v-model="street" />
+            </div>
+            <div class="field">
+              <label for="house">Дом</label>
+              <input id="house" type="text" v-model="house" />
+            </div>
+            <div class="field">
+              <label for="doc">Тип документа</label>
+              <select
+                name="doc"
+                id="doc"
+                v-model.trim="doc"
+                :class="{ invalid: $v.doc.$dirty && !$v.doc.required }"
+              >
+                <option value="passport">Паспорт</option>
+                <option value="cib">Свидетельство о рождении</option>
+                <option value="driverLicense">Вод. удостоверение</option>
+              </select>
+              <small v-if="$v.doc.$dirty && !$v.doc.required"
+                >Поле не должно быть пустым</small
+              >
+            </div>
+            <div class="field">
+              <label for="serial">Серия</label>
+              <input id="serial" type="text" v-model="serial" />
+            </div>
+            <div class="field">
+              <label for="number">Номер</label>
+              <input id="number" type="text" v-model="number" />
+            </div>
+            <div class="field">
+              <label for="issue">Дата выдачи</label>
+              <input
+                id="issue"
+                type="text"
+                v-model.trim="issue"
+                :class="{
+                  invalid:
+                    ($v.issue.$dirty && !$v.issue.required) ||
+                    !$v.issue.validateDate,
+                }"
+              />
+              <small v-if="$v.issue.$dirty && !$v.issue.required"
+                >Поле не должно быть пустым</small
+              >
+              <small v-if="!$v.issue.validateDate"
+                >Введите в формате
+                {{
+                  `${new Date().getDate()}-${new Date().getMonth()}-${new Date().getFullYear()}`
+                }}</small
+              >
+            </div>
+            <div class="field area">
+              <label for="placement">Кем выдан</label>
+              <textarea
+                name="placement"
+                id="placement"
+                cols="30"
+                rows="10"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+        <button type="submit">Отправить</button>
+      </form>
     </div>
-    <div class="input-field">
-      <label for="gender">Пол</label>
-      <input id="gender" type="text" v-model="gender" />
-    </div>
-    <div class="input-field">
-        <label for="male">Группа</label>
-        <select name="group" id="group" v-model.trim="group" :class="{ invalid: $v.group.$dirty && !$v.group.required }">
-            <option value="vip">VIP</option>
-            <option value="trouble">Проблемные</option>
-            <option value="oms">ОМС</option>
-        </select>
-    </div>
-    <div class="input-field">
-        <label for="doctor">Группа</label>
-        <select name="doctor" id="doctor" v-model.trim="doctor">
-            <option value="vip">VIP</option>
-            <option value="trouble">Проблемные</option>
-            <option value="oms">ОМС</option>
-        </select>
-    </div>
-    <div>
-      <label for="sms">Не отправлять СМС</label>
-      <input v-model="sms" type="checkbox" id="sms" />
-    </div>
-    <div class="input-field">
-      <label for="zip">Индекс</label>
-      <input id="zip" type="text" v-model="zip" />
-    </div>
-    <div class="input-field">
-      <label for="country">Страна</label>
-      <input id="country" type="text" v-model="country" />
-    </div>
-    <div class="input-field">
-      <label for="area">Область</label>
-      <input id="area" type="text" v-model="area" />
-    </div>
-    <div class="input-field">
-      <label for="city">Город</label>
-      <input
-        id="city"
-        type="text"
-        v-model.trim="city"
-        :class="{ invalid: $v.city.$dirty && !$v.city.required }"
-      />
-      <small v-if="$v.city.$dirty && !$v.city.required"
-        >Поле не должно быть пустым</small
-      >
-    </div>
-    <div class="input-field">
-      <label for="street">Улица</label>
-      <input id="street" type="text" v-model="street" />
-    </div>
-    <div class="input-field">
-      <label for="house">Дом</label>
-      <input id="house" type="text" v-model="house" />
-    </div>
-    <button type="submit">asdsad</button>
-  </form>
+  </div>
 </template>
 
 <script>
-import { required, helpers, maxLength } from "vuelidate/lib/validators";
+import { required, helpers } from "vuelidate/lib/validators";
 const validateDate = helpers.regex("date", /^\d{2}[./-]\d{2}[./-]\d{4}$/);
 const validatePhone = (value) => {
   if (/^7/.test(value)) {
     if (value.match(/\d/g).length === 11) {
-      console.log(value.match(/\d/g).length);
       return true;
     } else return false;
   } else return false;
@@ -148,9 +233,9 @@ export default {
     patronymic: "",
     birth: "",
     phone: "",
-    gender: '',
-    group:'',
-    doctor: '',
+    gender: "",
+    group: "",
+    doctor: "",
     sms: false,
     zip: "",
     country: "",
@@ -158,14 +243,21 @@ export default {
     city: "",
     street: "",
     house: "",
+    doc: "",
+    serial: "",
+    number: "",
+    placement: "",
+    issue: "",
   }),
   validations: {
     surname: { required },
     name: { required },
     birth: { required, validateDate },
-    phone: { required, validatePhone, maxLength: maxLength(25) },
+    phone: { required, validatePhone },
     city: { required },
     group: { required },
+    doc: { required },
+    issue: { required, validateDate },
   },
   methods: {
     onSubmit() {
@@ -181,45 +273,102 @@ export default {
 </script>
 
 <style lang="scss">
-.new-client-form {
-  border: 1px solid black;
-  padding: 5px;
+.box {
+  position: absolute;
+  .form-tab {
+    width: 45%;
+    height: 40px;
+    position: relative;
+    border-radius: 6px 6px 0 0;
+    transform-origin: 0 0;
+    background: rgb(210, 229, 236);
+    transform: perspective(9px) rotateX(0.93deg) translateZ(-1px);
+  }
+  .form-logo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    width: 35%;
+    height: 40px;
+    left: 10px;
+    top: 0;
+    img {
+      width: 30px;
+      height: 30px;
+    }
+    span {
+      font-family: "Lobster", cursive;
+      font-size: 20px;
+      margin-left: 10px;
+    }
+  }
+  .new-client-form {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    margin-top: -2px;
+
+    background: rgb(210, 229, 236);
+    border-radius: 0 5px 5px 5px;
+    .new-client-form__container {
+      display: flex;
+      justify-content: space-between;
+      padding: 15px 15px 0 15px;
+    }
+    .document-container {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    button {
+      width: 100%;
+      height: 60px;
+      outline: none;
+      background: white;
+      border: none;
+      border-radius: 0 0 5px 5px;
+      cursor: pointer;
+      font-family: "Roboto", sans-serif;
+      font-size: 15px;
+    }
+  }
 }
 
-.input-field {
+.field {
   display: flex;
   width: 200px;
   height: 27px;
-  margin-bottom: 8px;
+  margin-bottom: 13px;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
 
   label {
+    padding-left: 5px;
     font-size: 10px;
-    font-weight: 600;
-    color: rgb(123, 123, 126);
+    color: rgb(0, 0, 0);
+    font-family: "Roboto", sans-serif;
   }
-  input, select {
+  input,
+  select {
     width: 200px;
     height: 15px;
     padding: 2px 0 0 3px;
     background: rgb(232, 240, 254);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-radius: 3px 3px 0 0;
     outline: none;
     border: none;
-    border-bottom: 1px solid rgb(164, 164, 168);
+    border-bottom: 2px solid #00b4ed;
+    font-family: "Roboto", sans-serif;
     font-size: 12px;
   }
   select {
-    width: 200px;
     box-sizing: content-box;
     padding: 2px;
   }
-  .invalid {
+  input.invalid,
+  select.invalid {
     border-bottom: 1px solid red;
-    color: red;
   }
   small {
     font-size: 10px;
@@ -236,7 +385,7 @@ export default {
       padding-top: 2px;
       padding-left: 3px;
       background: rgb(232, 240, 254);
-      border-bottom: 1px solid rgb(164, 164, 168);
+      border-bottom: 2px solid #00b4ed;
       border-top-left-radius: 5px;
       font-size: 12px;
     }
@@ -245,6 +394,30 @@ export default {
       border-top-left-radius: 0;
     }
   }
-
+  .phone-container.invalid::before {
+    border-bottom: 1px solid red;
+  }
+}
+.field-checkbox {
+  display: flex;
+  flex-direction: flex-start;
+  align-items: center;
+  label {
+    font-family: "Roboto", sans-serif;
+    font-size: 13px;
+  }
+}
+.field.area {
+  height: 80px;
+  textarea {
+    width: 200px;
+    resize: none;
+    outline: none;
+    font-family: "Roboto", sans-serif;
+    background: #e8f0fe;
+    border: none;
+    border-radius: 5px 5px 0 0;
+    border-bottom: 2px solid #00b4ed;
+  }
 }
 </style>
