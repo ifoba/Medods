@@ -273,6 +273,12 @@ export default {
 </script>
 
 <style lang="scss">
+$invalid: rgb(255, 0, 0);
+$border: rgb(0, 180, 237);
+$back: rgb(210, 229, 236);
+$input: rgb(231, 239, 254);
+$robo: "Roboto", sans-serif;
+$field-w: 250px;
 .box {
   position: absolute;
   .form-tab {
@@ -281,7 +287,7 @@ export default {
     position: relative;
     border-radius: 6px 6px 0 0;
     transform-origin: 0 0;
-    background: rgb(210, 229, 236);
+    background: $back;
     transform: perspective(9px) rotateX(0.93deg) translateZ(-1px);
   }
   .form-logo {
@@ -290,7 +296,7 @@ export default {
     position: absolute;
     width: 35%;
     height: 40px;
-    left: 10px;
+    left: 20px;
     top: 0;
     img {
       width: 30px;
@@ -299,16 +305,15 @@ export default {
     span {
       font-family: "Lobster", cursive;
       font-size: 20px;
-      margin-left: 10px;
+      margin-left: 30px;
     }
   }
   .new-client-form {
     display: flex;
     flex-direction: column;
-    width: 450px;
+    width: 600px;
     margin-top: -2px;
-
-    background: rgb(210, 229, 236);
+    background: $back;
     border-radius: 0 5px 5px 5px;
     .new-client-form__container {
       display: flex;
@@ -322,22 +327,26 @@ export default {
     }
     button {
       width: 100%;
-      height: 60px;
+      height: 45px;
       outline: none;
-      background: white;
+      background: rgb(255, 255, 255);
       border: none;
       border-radius: 0 0 5px 5px;
       cursor: pointer;
-      font-family: "Roboto", sans-serif;
+      font-family: $robo;
       font-size: 15px;
+      transition: background 0.5s ease-in-out;
+    }
+    button:hover {
+      background: $border;
     }
   }
 }
 
 .field {
   display: flex;
-  width: 200px;
-  height: 27px;
+  width: $field-w;
+  height: 37px;
   margin-bottom: 13px;
   flex-direction: column;
   align-items: flex-start;
@@ -345,21 +354,21 @@ export default {
 
   label {
     padding-left: 5px;
-    font-size: 10px;
+    font-size: 11px;
     color: rgb(0, 0, 0);
-    font-family: "Roboto", sans-serif;
+    font-family: $robo;
   }
   input,
   select {
-    width: 200px;
-    height: 15px;
+    width: $field-w;
+    height: 20px;
     padding: 2px 0 0 3px;
     background: rgb(232, 240, 254);
     border-radius: 3px 3px 0 0;
     outline: none;
     border: none;
-    border-bottom: 2px solid #00b4ed;
-    font-family: "Roboto", sans-serif;
+    border-bottom: 2px solid $border;
+    font-family: $robo;
     font-size: 12px;
   }
   select {
@@ -368,34 +377,34 @@ export default {
   }
   input.invalid,
   select.invalid {
-    border-bottom: 1px solid red;
+    border-bottom: 2px solid $invalid;
   }
   small {
     font-size: 10px;
-    color: red;
+    color: $invalid;
   }
   .phone-container {
     display: flex;
     &:before {
       content: "+";
       width: 7px;
-      height: 15px;
+      height: 20px;
       display: flex;
       align-items: center;
       padding-top: 2px;
       padding-left: 3px;
-      background: rgb(232, 240, 254);
-      border-bottom: 2px solid #00b4ed;
+      background: $input;
+      border-bottom: 2px solid $border;
       border-top-left-radius: 5px;
       font-size: 12px;
     }
     #phone {
-      width: 190px;
+      width: $field-w - 10px;
       border-top-left-radius: 0;
     }
   }
   .phone-container.invalid::before {
-    border-bottom: 1px solid red;
+    border-bottom: 2px solid $invalid;
   }
 }
 .field-checkbox {
@@ -403,21 +412,49 @@ export default {
   flex-direction: flex-start;
   align-items: center;
   label {
-    font-family: "Roboto", sans-serif;
+    font-family: $robo;
     font-size: 13px;
   }
 }
 .field.area {
   height: 80px;
   textarea {
-    width: 200px;
+    width: $field-w;
     resize: none;
     outline: none;
-    font-family: "Roboto", sans-serif;
-    background: #e8f0fe;
+    font-family: $robo;
+    background: $input;
     border: none;
     border-radius: 5px 5px 0 0;
-    border-bottom: 2px solid #00b4ed;
+    border-bottom: 2px solid $border;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .box {
+    .form-tab {
+      width: 65%;
+    }
+    .form-logo {
+      span {
+        margin-left: 5px;
+      }
+    }
+    .new-client-form {
+      width: 300px;
+      max-height: 80vh;
+      overflow: scroll;
+      .new-client-form__container {
+        flex-direction: column;
+        align-items: center;
+      }
+      button {
+        min-height: 50px;
+      }
+      .field-checkbox {
+          margin-bottom: 15px;
+      }
+    }
   }
 }
 </style>
