@@ -212,6 +212,7 @@
         </div>
         <button type="submit">Отправить</button>
       </form>
+      <div class="msg" :class="{ show: msg }">Отправлено</div>
     </div>
   </div>
 </template>
@@ -248,6 +249,7 @@ export default {
     number: "",
     placement: "",
     issue: "",
+    msg: false,
   }),
   validations: {
     surname: { required },
@@ -262,11 +264,11 @@ export default {
   methods: {
     onSubmit() {
       if (this.$v.$invalid) {
-        this.$v.$touch();
-        console.log("Not Submit");
+        this.$v.$touch();       
         return;
       }
-      console.log("Submit");
+      this.msg = true;
+      setTimeout(()=>{this.msg =false}, 3000)      
     },
   },
 };
@@ -279,8 +281,9 @@ $back: rgb(210, 229, 236);
 $input: rgb(231, 239, 254);
 $robo: "Roboto", sans-serif;
 $field-w: 250px;
+
 .box {
-  position: absolute;
+  position: relative;
   .form-tab {
     width: 45%;
     height: 40px;
@@ -429,6 +432,42 @@ $field-w: 250px;
     border-bottom: 2px solid $border;
   }
 }
+.msg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 120px;
+  height: 30px;
+  background: rgb(12, 121, 12);
+  color: white;
+  font-family: $robo;
+  border-radius: 10px 0 0 10px;
+  position: relative;
+  top: -650px;
+  float: right;
+  visibility: hidden;
+  opacity: 0;
+}
+.show {
+animation: show 3s 1;
+}
+
+@keyframes show {
+  0% {
+    visibility: visible;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
 
 @media screen and (max-width: 600px) {
   .box {
@@ -452,9 +491,12 @@ $field-w: 250px;
         min-height: 50px;
       }
       .field-checkbox {
-          margin-bottom: 15px;
+        margin-bottom: 15px;
       }
     }
+  }
+  .msg {
+     top: -500px; 
   }
 }
 </style>

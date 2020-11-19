@@ -27,11 +27,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  padding-top: 60px;
   background: rgb(39, 38, 38);
-  width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 </style>
