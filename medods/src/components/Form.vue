@@ -263,12 +263,17 @@ export default {
   },
   methods: {
     onSubmit() {
+      if (this.msg === true) {
+        return;
+      }
       if (this.$v.$invalid) {
-        this.$v.$touch();       
+        this.$v.$touch();
         return;
       }
       this.msg = true;
-      setTimeout(()=>{this.msg =false}, 3000)      
+      setTimeout(() => {
+        this.msg = false;
+      }, 3000);
     },
   },
 };
@@ -450,7 +455,7 @@ $field-w: 250px;
   opacity: 0;
 }
 .show {
-animation: show 3s 1;
+  animation: show 3s 1;
 }
 
 @keyframes show {
@@ -497,7 +502,7 @@ animation: show 3s 1;
     }
   }
   .msg {
-     top: -450px; 
+    top: -450px;
   }
 }
 </style>
