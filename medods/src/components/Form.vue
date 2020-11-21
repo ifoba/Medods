@@ -283,7 +283,7 @@ export default {
 $invalid: rgb(255, 0, 0);
 $border: rgb(0, 180, 237);
 $back: rgb(210, 229, 236);
-$input: rgb(231, 239, 254);
+$input: rgb(255, 255, 255);
 $robo: "Roboto", sans-serif;
 $field-w: 250px;
 
@@ -371,7 +371,7 @@ $field-w: 250px;
     width: $field-w;
     height: 20px;
     padding: 2px 0 0 3px;
-    background: rgb(232, 240, 254);
+    background: $input;
     border-radius: 3px 3px 0 0;
     outline: none;
     border: none;
